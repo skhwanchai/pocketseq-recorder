@@ -1,5 +1,5 @@
 // เก็บหน้าเว็บไว้ในเครื่อง เปิดได้แม้ไม่มีอินเทอร์เน็ต (ฟอนต์จะใช้ตัวสำรองแทน)
-const CACHE = 'psrec-v2';
+const CACHE = 'psrec-v3';
 const FILES = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './recipes.js', './music.js'];
 
 self.addEventListener('install', e => {

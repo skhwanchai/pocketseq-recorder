@@ -28,6 +28,7 @@
 :root[data-theme="dark"]{--bg:#121211; --panel:#1C1C1B; --ink:#EDEDE8; --muted:#A3A19B; --line:#34332F; --soft:#262624;}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55}
+.wrap.wide{max-width:1080px}
 .wrap{max-width:760px;margin:0 auto;padding:28px 16px 48px;display:flex;flex-direction:column;gap:16px}
 header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:10px}
 h1{margin:0;font-family:var(--mono);font-size:26px;line-height:1.1;letter-spacing:-0.01em}
@@ -42,6 +43,9 @@ button{font:inherit;cursor:pointer}
 .btn:hover{background:var(--soft)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#161616}
+a.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+a.btn small{font-weight:400;opacity:.75}
+.btn.wide{width:100%}
 .deck{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
 .recbtn{width:96px;height:96px;border-radius:50%;border:3px solid var(--ink);background:var(--panel);display:flex;align-items:center;justify-content:center}
 .recbtn span{width:44px;height:44px;border-radius:50%;background:var(--rec);transition:all .15s}
@@ -70,11 +74,11 @@ ol li{margin:2px 0}
 .small{font-size:13px;color:var(--muted)}
 
 /* ---------- แท็บ ---------- */
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--soft);padding:4px;border-radius:12px}
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;background:var(--soft);padding:4px;border-radius:12px}
 .tab{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border-radius:9px;font-weight:600;color:var(--ink);text-decoration:none}
 .tab[aria-current="page"]{background:var(--panel);box-shadow:0 0 0 1.5px var(--ink)}
-#viewRec,#viewMusic{display:flex;flex-direction:column;gap:16px}
-#viewRec[hidden],#viewMusic[hidden]{display:none}
+#viewRec,#viewMusic,#viewManual,#viewAbout{display:flex;flex-direction:column;gap:16px}
+#viewRec[hidden],#viewMusic[hidden],#viewManual[hidden],#viewAbout[hidden]{display:none}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .mono{font-family:var(--mono)}
 /* ---------- ทำดนตรี: รายการ ---------- */
@@ -176,6 +180,115 @@ details{margin-top:6px;border-top:1px solid var(--line);padding-top:8px}
 summary{cursor:pointer;font-weight:600;min-height:32px}
 details a{color:var(--ink);font-weight:600}
 @media (max-width:480px){.g16{gap:2px;grid-template-columns:48px repeat(16,minmax(0,1fr))}.card{padding:14px 12px}.chain{grid-template-columns:repeat(4,minmax(0,1fr))}.bpmbox{margin-left:0}.dtitle{font-size:20px}}
+
+/* ---------- คู่มือ ---------- */
+.dlgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.dl{border:1.5px solid var(--ink);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;background:var(--panel)}
+.dl img{display:block;width:100%;height:auto;aspect-ratio:400/566;object-fit:cover;object-position:top;border-bottom:1.5px solid var(--ink);background:#fff;max-height:220px}
+.dlb{display:flex;flex-direction:column;gap:6px;padding:12px;flex:1}
+.dlb>span{font-size:13px;color:var(--muted);flex:1}
+.dlb .btn{margin-top:4px}
+.dl.code .dlicon{height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:var(--ink);color:var(--bg);font-family:var(--mono);font-weight:600;border-bottom:1.5px solid var(--ink)}
+.steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+kbd{font-family:var(--mono);font-size:.85em;font-weight:600;border:1.5px solid var(--ink);border-bottom-width:3px;border-radius:6px;padding:0 6px;background:var(--panel);white-space:nowrap}
+code{font-family:var(--mono);font-size:.88em;background:var(--soft);border-radius:4px;padding:0 5px;white-space:nowrap}
+.keys{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.key{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.key>kbd{align-self:flex-start;font-size:14px}
+.key dl{margin:0;display:grid;grid-template-columns:96px 1fr;gap:4px 10px;font-size:14px}
+.key dt{color:var(--muted)}
+.key dd{margin:0}
+.pad16{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;max-width:420px}
+.pad16>div{border:1.5px solid var(--ink);border-radius:10px;min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.pad16>div>b{font-size:18px;color:var(--ink)}
+.cols3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.cols3 h3{margin:0 0 8px;font-size:15px}
+.kv{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;font-size:14px}
+.kv code{margin-right:6px}
+/* ---------- โปรเจกต์ ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:28px;align-items:center;padding:8px 0 4px}
+.eyebrow{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.herotitle{margin:8px 0 14px;font-size:clamp(30px,6vw,46px);line-height:1.15;letter-spacing:-0.01em}
+.lede{font-size:17px;margin:0 0 18px;color:var(--ink)}
+.ctas{display:flex;flex-wrap:wrap;gap:8px}
+.herofig{margin:0;border:1.5px solid var(--ink);border-radius:18px;overflow:hidden;background:var(--panel)}
+.herofig img,.gallery img{display:block;width:100%;height:auto}
+.herofig figcaption,.gallery figcaption{font-size:13px;color:var(--muted);padding:8px 12px}
+.statbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1.5px solid var(--ink);border-radius:14px;background:var(--panel);overflow:hidden}
+.statbar>div{display:flex;flex-direction:column;align-items:center;padding:14px 6px;text-align:center}
+.statbar>div+div{border-left:1px solid var(--line)}
+.statbar b{font-family:var(--mono);font-size:28px;line-height:1.1}
+.statbar span{font-size:13px;color:var(--muted)}
+.aboutgrid{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:24px;align-items:start}
+.aboutmain{display:flex;flex-direction:column;gap:30px}
+.aboutmain>section>h2{font-size:22px;margin:0 0 12px;padding-bottom:6px;border-bottom:2px solid var(--ink)}
+.story p{font-size:16px;margin:0 0 12px}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pillar{border:1.5px solid var(--ink);border-radius:12px;padding:14px;background:var(--panel);display:flex;flex-direction:column;gap:6px}
+.pillar p{margin:0;font-size:14px;color:var(--muted)}
+.pnum{font-family:var(--mono);font-weight:600;color:var(--accent)}
+.feats{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.feats li{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;color:var(--muted);display:flex;flex-direction:column}
+.feats li b{color:var(--ink);font-size:15px}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+.gallery figure{margin:0;border:1.5px solid var(--ink);border-radius:12px;overflow:hidden;background:var(--panel)}
+.spec dl{margin:0;display:grid;grid-template-columns:110px 1fr;gap:8px 14px}
+.spec dt{font-weight:600}
+.spec dd{margin:0;color:var(--muted)}
+.timeline{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.timeline li{position:relative;display:flex;flex-direction:column}
+.timeline li::before{content:"";position:absolute;left:-25px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--panel);border:2px solid var(--ink)}
+.timeline li.cur::before{background:var(--accent);border-color:var(--accent)}
+.timeline b{font-family:var(--mono)}
+.timeline span{color:var(--muted);font-size:14px}
+.next{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.next li{border:1.5px dashed var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;font-size:14px;color:var(--muted)}
+.next li b{color:var(--ink);font-size:15px}
+.aboutmain details{border-top:1px solid var(--line);padding:8px 0;margin:0}
+.aboutmain details p{margin:6px 0 0;color:var(--muted)}
+.aboutmain details a,.creator a{color:var(--ink);font-weight:600}
+.aboutside{position:sticky;top:12px;display:flex;flex-direction:column;gap:12px}
+.sidebox{display:flex;flex-direction:column;gap:10px}
+.stage{font-size:18px;line-height:1.3}
+.stages{display:flex;flex-wrap:wrap;gap:4px}
+.stages span{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:0 8px;color:var(--muted)}
+.stages span.done{border-color:var(--ink);color:var(--ink)}
+.stages span.cur{background:var(--accent);border-color:var(--accent);color:#161616;font-weight:600}
+.bar{height:10px;border-radius:5px;background:var(--soft);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.creator{display:flex;gap:12px;align-items:flex-start}
+.creator img{border-radius:50%;border:1.5px solid var(--ink);flex:none;background:var(--soft)}
+.creator>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+.creator a{font-size:13px;word-break:break-all}
+.endcta{text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;padding:28px 16px}
+.endcta h2{font-size:22px;margin:0}
+.endcta p{margin:0 0 6px;max-width:520px;color:var(--muted)}
+.endcta .ctas{justify-content:center}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;gap:18px}
+  .herofig{max-width:420px;justify-self:center}
+  .aboutgrid{grid-template-columns:1fr}
+  .aboutside{position:static;order:-1}
+  .pillars{grid-template-columns:1fr}
+  .statbar{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .statbar>div:nth-child(4){border-left:0}
+  .statbar>div:nth-child(n+4){border-top:1px solid var(--line)}
+}
+@media (max-width:480px){
+  .tabs{gap:2px;padding:3px}
+  .tab{flex-direction:column;gap:2px;font-size:12px;min-height:52px;padding:4px 0}
+  .feats,.gallery{grid-template-columns:1fr}
+  .spec dl{grid-template-columns:1fr;gap:2px}
+  .spec dd{margin-bottom:8px}
+  .key dl{grid-template-columns:84px 1fr}
+  .keys{grid-template-columns:1fr}
+  .dlgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .dl img,.dl.code .dlicon{max-height:150px;height:150px}
+  .dlb{padding:10px}
+  .dlb .btn{font-size:13px;padding:8px}
+  .dlb .btn small{display:none}
+  .lede{font-size:16px}
+}
 @media (max-width:480px){.deck{grid-template-columns:1fr;justify-items:center;text-align:center}.time{font-size:38px}}
 </style>
 </head>
@@ -184,7 +297,7 @@ details a{color:var(--ink);font-weight:600}
 
 <header>
   <div>
-    <div class="sub">อัดเสียงผ่าน USB · คลังสูตรเพลงและเมโทรนอม</div>
+    <div class="sub">เครื่องทำบีตพกพา · อัดเสียง · สูตรเพลง · คู่มือ</div>
     <h1>POCKET SEQ</h1>
   </div>
   <span id="conn" class="pill">ยังไม่เชื่อมต่อ</span>
@@ -195,6 +308,10 @@ details a{color:var(--ink);font-weight:600}
     <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>อัดเสียง</a>
   <a class="tab" id="tabMusic" href="#music">
     <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 18V5l11-2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="17" cy="16" r="3" fill="currentColor"/></svg>ทำดนตรี</a>
+  <a class="tab" id="tabManual" href="#manual">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 21V5M8 7h7M8 11h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>คู่มือ</a>
+  <a class="tab" id="tabAbout" href="#about">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>โปรเจกต์</a>
 </nav>
 
 <div id="viewRec">
@@ -247,6 +364,302 @@ details a{color:var(--ink);font-weight:600}
 </div><!-- /viewRec -->
 
 <div id="viewMusic" hidden></div>
+
+<div id="viewManual" hidden>
+
+<section class="card">
+  <h2>ดาวน์โหลด</h2>
+  <p class="small" style="margin:-4px 0 12px">ไฟล์ PDF ขนาด A4 พิมพ์ได้เลย · เฟิร์มแวร์เปิดด้วย Arduino IDE</p>
+  <div class="dlgrid">
+    <article class="dl">
+      <img src="img/thumb-PocketSeq-Manual.jpg" alt="หน้าปกคู่มือใช้งาน" loading="lazy" width="400" height="566">
+      <div class="dlb"><b>คู่มือใช้งาน</b><span>ปุ่ม หน้าจอ ทำบีต เมโลดี้ chain FX · 5 หน้า</span>
+      <a class="btn primary" href="downloads/PocketSeq-Manual.pdf" download>ดาวน์โหลด PDF <small>430 KB</small></a></div>
+    </article>
+    <article class="dl">
+      <img src="img/thumb-PocketSeq-Circuit.jpg" alt="หน้าปกคู่มือวงจร" loading="lazy" width="400" height="566">
+      <div class="dlb"><b>คู่มือวงจร</b><span>ผัง breadboard ขา Pico สายทุกเส้น · 4 หน้า</span>
+      <a class="btn primary" href="downloads/PocketSeq-Circuit.pdf" download>ดาวน์โหลด PDF <small>430 KB</small></a></div>
+    </article>
+    <article class="dl">
+      <img src="img/thumb-PocketSeq-Songbook.jpg" alt="หน้าปกสมุดเพลง" loading="lazy" width="400" height="566">
+      <div class="dlb"><b>สมุดเพลง</b><span>36 สูตรเพลง เมโทรนอม แบ็กกิ้งกีตาร์ สเกล · 10 หน้า</span>
+      <a class="btn primary" href="downloads/PocketSeq-Songbook.pdf" download>ดาวน์โหลด PDF <small>720 KB</small></a></div>
+    </article>
+    <article class="dl">
+      <img src="img/thumb-AlwaysWithMe-Guide.jpg" alt="หน้าแรกไกด์ Always With Me" loading="lazy" width="400" height="566">
+      <div class="dlb"><b>ไกด์ Always With Me</b><span>คอร์ด บีตโลไฟ เมโทรนอม 3/4 · 3 หน้า</span>
+      <a class="btn primary" href="downloads/AlwaysWithMe-Guide.pdf" download>ดาวน์โหลด PDF <small>330 KB</small></a></div>
+    </article>
+    <article class="dl">
+      <img src="img/thumb-JingleBells.jpg" alt="หน้าแรก Jingle Bells" loading="lazy" width="400" height="566">
+      <div class="dlb"><b>Jingle Bells</b><span>ตั้งเครื่อง โน้ตทำนอง คอร์ดกีตาร์ · 2 หน้า</span>
+      <a class="btn primary" href="downloads/JingleBells.pdf" download>ดาวน์โหลด PDF <small>290 KB</small></a></div>
+    </article>
+    <article class="dl code">
+      <div class="dlicon" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>.ino</span></div>
+      <div class="dlb"><b>เฟิร์มแวร์ v2.2</b><span>โค้ด Arduino สำหรับ Pico 2 W · ต้องติดตั้งบอร์ด arduino-pico ก่อน</span>
+      <a class="btn primary" href="downloads/pocket_seq_v22.ino" download>ดาวน์โหลดโค้ด <small>72 KB</small></a></div>
+    </article>
+  </div>
+</section>
+
+<section class="card">
+  <h2>เริ่มใช้ใน 1 นาที</h2>
+  <ol class="steps">
+    <li><b>เปิดเครื่อง</b> เสียบสาย USB แล้วกดสวิตช์ POWER ให้เด้งขึ้น · จอขึ้น <code>LOADED</code> = งานเดิมกลับมาแล้ว</li>
+    <li><b>เล่น</b> กด <kbd>PLAY</kbd> · กดอีกครั้งหยุด</li>
+    <li><b>ปรับ</b> หมุนปุ่ม A = ความเร็ว · หมุนปุ่ม B = ความดัง</li>
+    <li><b>ทำบีต</b> หยุดเครื่อง → <kbd>SOUND</kbd> เลือกแทร็ก → กดปุ่ม 4×4 เปิดช่องจังหวะ</li>
+    <li><b>เซฟ</b> หยุดแล้วไม่แตะปุ่ม 2 วินาที เครื่องเซฟเอง หรือกด <kbd>REC</kbd> ค้างจนขึ้น <code>SAVED</code></li>
+  </ol>
+</section>
+
+<section class="card">
+  <h2>ปุ่มฟังก์ชัน 7 ปุ่ม <small>ค้าง = กดค้าง 1 วินาที</small></h2>
+  <div class="keys">
+    <div class="key"><kbd>PLAY</kbd><dl><dt>กด</dt><dd>เล่น / หยุด</dd><dt>โหมดเมโลดี้</dt><dd>เล่น / หยุด (เมโลดี้เล่นทับบีต)</dd></dl></div>
+    <div class="key"><kbd>REC</kbd><dl><dt>กด</dt><dd>ไปโหมดเมโลดี้ (จอขึ้น MELODY)</dd><dt>ค้าง</dt><dd>เซฟทันที (SAVED)</dd><dt>โหมดเมโลดี้</dt><dd>กดสั้น = กลับโหมดบีต</dd></dl></div>
+    <div class="key"><kbd>SOUND</kbd><dl><dt>กด</dt><dd>หยุดอยู่: เลือกแทร็ก KICK › SNARE › HAT › BASS · เล่นอยู่: เลือกเครื่องดนตรีสด</dd><dt>ค้าง</dt><dd>หน้า MUTE · + S1–S4 ปิดกลอง · + S5–S8 ปิดลูป</dd><dt>โหมดเมโลดี้</dt><dd>เลือกเครื่องดนตรีของลูปนี้</dd></dl></div>
+    <div class="key"><kbd>PTRN</kbd><dl><dt>กด</dt><dd>แพตเทิร์นถัดไป A → B → C → D · ถ้ามี chain = ยกเลิก</dd><dt>ค้าง</dt><dd>+ S1–S4 = เรียงแพตเทิร์นเป็นเพลง (chain)</dd><dt>โหมดเมโลดี้</dt><dd>เลือกลูป L1 → L4</dd></dl></div>
+    <div class="key"><kbd>BPM</kbd><dl><dt>ค้าง</dt><dd>หน้า SET TEMPO · + S1 −10 · S2 −1 · S3 +1 · S4 +10</dd><dt>ค้าง + หมุน A</dt><dd>SWING</dd><dt>โหมดเมโลดี้</dt><dd>กดแล้วปล่อย = ใส่ช่องเว้น --</dd></dl></div>
+    <div class="key"><kbd>FX</kbd><dl><dt>กด</dt><dd>เปลี่ยน FX CLEAN › OD › DIST › FUZZ › REV › DLY</dd><dt>ค้าง</dt><dd>สลับ ♫ KEYS (ไม่ใส่กลอง) ↔ ALL</dd><dt>ค้าง + หมุน A</dt><dd>ความแรง FX</dd></dl></div>
+    <div class="key"><kbd>SELECT</kbd><dl><dt>กด</dt><dd>ล้างแทร็กที่เลือก (CLEARED)</dd><dt>ค้าง</dt><dd>ล้างทั้งแพตเทิร์น (CLR ALL)</dd><dt>โหมดเมโลดี้</dt><dd>สั้น = ลบโน้ตล่าสุด · ค้าง = ล้างลูปนี้</dd></dl></div>
+    <div class="key"><kbd>ปุ่มหมุน</kbd><dl><dt>A หมุน</dt><dd>BPM ทีละ 1 · แตะ 2–4 ครั้ง = ตั้งตามจังหวะที่แตะ</dd><dt>B หมุน</dt><dd>ความดังรวม 0–100%</dd><dt>B กด</dt><dd>ปิด/เปิด FX ทันที</dd></dl></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>ปุ่ม 4×4 <small>หยุดอยู่ = ช่องจังหวะ 1–16 · เล่นอยู่ / โหมดเมโลดี้ = โน้ต</small></h2>
+  <div class="pad16" role="img" aria-label="ผังปุ่ม 4 คูณ 4: S1 ถึง S16 คือโน้ต C4 ถึง D6">
+    <div><b>1</b>C4</div><div><b>2</b>D4</div><div><b>3</b>E4</div><div><b>4</b>F4</div>
+    <div><b>5</b>G4</div><div><b>6</b>A4</div><div><b>7</b>B4</div><div><b>8</b>C5</div>
+    <div><b>9</b>D5</div><div><b>10</b>E5</div><div><b>11</b>F5</div><div><b>12</b>G5</div>
+    <div><b>13</b>A5</div><div><b>14</b>B5</div><div><b>15</b>C6</div><div><b>16</b>D6</div>
+  </div>
+  <p class="small" style="margin:10px 0 0">คีย์ขาวของเปียโนเรียงจากโดกลาง (C4) · ถ้าติดตั้งแผงปุ่มหมุนไปด้านข้าง ให้นับ S1 จากมุมที่มีเลข 1 บนแผง</p>
+</section>
+
+<section class="card">
+  <h2>ทำเพลงทีละขั้น</h2>
+  <details open><summary>ทำบีต</summary><ol>
+    <li>หยุดเครื่องก่อน (จอขึ้น STOP)</li>
+    <li><kbd>SOUND</kbd> เลือกแทร็ก KICK › SNARE › HAT › BASS</li>
+    <li>กดปุ่ม 4×4 เปิด/ปิดช่อง 1–16 (ได้ยินตัวอย่าง)</li>
+    <li>ทำให้ครบทุกแทร็ก แล้วกด <kbd>PLAY</kbd> ฟัง · <kbd>PTRN</kbd> ไปแพตเทิร์นถัดไป มี 4 แบบ A–D</li></ol></details>
+  <details><summary>เล่นสดทับบีต</summary><ol>
+    <li>กด <kbd>PLAY</kbd> ให้บีตเล่น</li>
+    <li><kbd>SOUND</kbd> เลือกเครื่องดนตรี (ชื่อขึ้นบนจอ)</li>
+    <li>กดปุ่ม 4×4 = เล่นโน้ต · กดหลายปุ่มพร้อมกันเป็นคอร์ด</li>
+    <li>เล่นสดไม่ถูกบันทึก · DRUM+BASS: แถวบน = กลอง 3 แถวล่าง = โน้ตเบส</li></ol></details>
+  <details><summary>พิมพ์เมโลดี้ (4 ลูป)</summary><ol>
+    <li>กด <kbd>REC</kbd> สั้น ๆ → จอขึ้น MELODY</li>
+    <li><kbd>PTRN</kbd> เลือกลูป L1 › L2 › L3 › L4 · <kbd>SOUND</kbd> เลือกเครื่องดนตรีของลูปนี้</li>
+    <li>กดปุ่ม 4×4 = พิมพ์โน้ตลงช่องถัดไป · กด <kbd>BPM</kbd> แล้วปล่อย = ใส่ช่องเว้น --</li>
+    <li><kbd>SELECT</kbd> สั้น = ลบตัวล่าสุด · ค้าง = ล้างลูปนี้</li>
+    <li>ครบ 16 ช่องจอขึ้น FULL 16/16 · กด <kbd>REC</kbd> สั้น กลับโหมดบีต</li></ol>
+    <p class="small">ทั้ง 4 ลูปเล่นพร้อมกัน และใช้ร่วมกันทุกแพตเทิร์น</p></details>
+  <details><summary>ต่อแพตเทิร์นเป็นเพลง (CHAIN)</summary><ol>
+    <li>กด <kbd>PTRN</kbd> ค้างไว้ แล้วกด S1=A S2=B S3=C S4=D ตามลำดับเพลง ได้ถึง 16 ตัว</li>
+    <li>ปล่อย <kbd>PTRN</kbd> → จอขึ้น CHAIN 4 · กด <kbd>PLAY</kbd> เล่นห้องละ 1 แพตเทิร์น ครบแล้ววนใหม่</li>
+    <li>ล้าง chain: กด <kbd>PTRN</kbd> สั้น 1 ครั้ง → NO CHAIN</li></ol>
+    <p class="small">มุมจอบอก CH A 1/4 · chain ไม่เซฟ ปิดเครื่องแล้วหาย</p></details>
+  <details><summary>ปิดเสียงบางแทร็ก (MUTE)</summary><ol>
+    <li>กด <kbd>SOUND</kbd> ค้าง → จอเป็นหน้า MUTE</li>
+    <li>ค้าง <kbd>SOUND</kbd> + S1–S4 = กลอง · + S5–S8 = ลูป L1–L4 · กดซ้ำ = เปิดกลับ</li></ol></details>
+  <details><summary>อัดเพลงเป็นไฟล์ .wav</summary><ol>
+    <li>ต่อสาย USB เข้า Mac แล้วปิด Serial Monitor ใน Arduino IDE</li>
+    <li>ไปแท็บ <a href="#rec">อัดเสียง</a> กดเชื่อมต่อเครื่อง เลือกพอร์ตของ Pico</li>
+    <li>กดปุ่มแดง แล้วกด PLAY บนเครื่อง · หยุดเครื่องแล้วไฟล์จะดาวน์โหลดให้เอง</li></ol></details>
+</section>
+
+<section class="card">
+  <h2>FX · เครื่องดนตรี · ข้อความบนจอ</h2>
+  <div class="cols3">
+    <div><h3>FX 6 แบบ</h3><ul class="kv">
+      <li><code>CLN</code> เสียงปกติ</li><li><code>OD</code> แตกนุ่ม</li><li><code>DIST</code> แตกหนัก</li>
+      <li><code>FUZZ</code> แตกโบราณ</li><li><code>REV</code> ก้อง</li><li><code>DLY</code> สะท้อน</li>
+      <li><code>SWING</code> ค้าง BPM + หมุน A</li></ul></div>
+    <div><h3>เครื่องดนตรี 10 แบบ</h3><ul class="kv">
+      <li><code>PIANO</code> เปียโน</li><li><code>PLUCK</code> ดีดสาย</li><li><code>MARIMBA</code> ไม้เคาะ</li>
+      <li><code>BELL</code> ระฆัง</li><li><code>CHIP</code> เกม 8 บิต</li><li><code>SYNTH</code> ซินธ์ลากยาว</li>
+      <li><code>LEAD</code> ซินธ์โซโล</li><li><code>BRASS</code> แตร</li><li><code>ORGAN</code> ออร์แกน</li><li><code>FLUTE</code> ขลุ่ย</li></ul></div>
+    <div><h3>ข้อความบนจอ</h3><ul class="kv">
+      <li><code>LOADED</code> โหลดงานที่เซฟไว้</li><li><code>SAVED</code> เซฟเรียบร้อย</li><li><code>CLEARED</code> ล้างแทร็กแล้ว</li>
+      <li><code>CLR ALL</code> ล้างแพตเทิร์นแล้ว</li><li><code>FULL 16/16</code> ลูปเต็มแล้ว</li><li><code>REST · DEL</code> ใส่เว้น · ลบแล้ว</li>
+      <li><code>USB REC</code> กำลังอัดผ่านสาย</li></ul></div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>แก้ปัญหา</h2>
+  <details><summary>อัปโหลดแล้วขึ้น “No drive to deploy”</summary>
+    <p>ถอดสาย กดปุ่ม BOOTSEL บน Pico ค้างไว้แล้วเสียบสายใหม่ · บน Mac ถ้ามีหน้าต่างถามให้กด Allow (หรือ System Settings → Privacy &amp; Security → Allow accessories to connect)</p></details>
+  <details><summary>อัปโหลดเสร็จแล้วจอไม่ติด</summary>
+    <p>เฟิร์มแวร์ v2.1 ขึ้นไปแก้แล้ว · ถ้ายังเป็น ปิดแล้วเปิดสวิตช์ POWER ใหม่ 1 ครั้ง</p></details>
+  <details><summary>ปิดเปิดเครื่องแล้วเสียงดังขึ้นเอง</summary>
+    <p>เครื่องเซฟความดัง BPM และ FX ตอนหยุดเล่นแล้วไม่แตะปุ่ม 2 วินาที · ถ้าปิดเครื่องทันทีหลังปรับ ให้กด REC ค้างจนขึ้น SAVED ก่อน</p></details>
+  <details><summary>เปิดเครื่องใหม่แล้ว chain หาย</summary>
+    <p>ตั้งใจให้เป็นแบบนั้น chain ไม่ถูกเซฟ ต้องตั้งใหม่ทุกครั้ง (ค้าง PTRN + S1–S4)</p></details>
+  <details><summary>หน้าอัดเสียงขึ้นว่า “เครื่องไม่ตอบ”</summary>
+    <p>เช็กว่าอัปโหลดเฟิร์มแวร์ v2.2 แล้ว และปิด Serial Monitor ใน Arduino IDE เพราะใช้สายพร้อมกันไม่ได้ · ใช้ Chrome หรือ Edge บนคอมเท่านั้น</p></details>
+  <details><summary>อยากล้างทุกอย่างกลับค่าเริ่มต้น</summary>
+    <p>กด SELECT ค้างไว้ตอนเปิดเครื่อง · งานที่เซฟไว้จะหายหมด</p></details>
+</section>
+
+</div><!-- /viewManual -->
+
+<div id="viewAbout" hidden>
+
+<section class="hero">
+  <div class="herotext">
+    <span class="eyebrow">โปรเจกต์ · DEMO 1</span>
+    <h2 class="herotitle">เครื่องทำบีตพกพา<br>ที่นักออกแบบ<br>ลงมือสร้างเอง</h2>
+    <p class="lede">Pocket Seq คือเครื่องทำบีตและเมโลดี้ขนาดเล็ก ประกอบบน breadboard สองแผ่น ทุกปุ่ม ทุกหน้าจอ และทุกหน้าคู่มือ ออกแบบโดยคนที่เริ่มหัดอิเล็กทรอนิกส์จากศูนย์</p>
+    <div class="ctas">
+      <a class="btn primary" href="#music">ลองฟังเพลง</a>
+      <a class="btn" href="#manual">ดาวน์โหลดคู่มือ</a>
+      <a class="btn" href="https://github.com/skhwanchai/pocketseq-recorder" target="_blank" rel="noopener">ดูโค้ดบน GitHub</a>
+    </div>
+  </div>
+  <figure class="herofig">
+    <img src="img/device.jpg" alt="เครื่อง Pocket Seq ต้นแบบ DEMO 1 บนโครงฟองน้ำสีดำ มีปุ่ม 4×4 ลำโพง ปุ่มหมุนสองตัว จอ OLED และปุ่มฟังก์ชันติดป้ายสีชมพู" width="900" height="1260">
+    <figcaption>ต้นแบบ DEMO 1 · โครงฟองน้ำ ป้ายปุ่มเขียนมือ</figcaption>
+  </figure>
+</section>
+
+<section class="statbar" aria-label="ตัวเลขของโปรเจกต์">
+  <div><b>v2.2</b><span>เฟิร์มแวร์ล่าสุด</span></div>
+  <div><b>44</b><span>สูตรเพลง</span></div>
+  <div><b>9</b><span>เมโทรนอม</span></div>
+  <div><b>10</b><span>เครื่องดนตรี</span></div>
+  <div><b>6</b><span>FX</span></div>
+</section>
+
+<div class="aboutgrid">
+<div class="aboutmain">
+
+  <section class="story">
+    <h2>เรื่องราว</h2>
+    <p>เราเป็นนักออกแบบกราฟิก ไม่ใช่วิศวกร งานประจำคือสอนและทำงานออกแบบ แต่เครื่องดนตรีพกพาเล็ก ๆ อย่าง Pocket Operator คือแรงบันดาลใจ ทุกครั้งที่กดมันก็สงสัยว่า ข้างในทำงานยังไง แล้วถ้าลองสร้างเองล่ะ</p>
+    <p>คำถามนั้นพาไปสู่การหัดเขียนภาษา C หัดต่อวงจร และเรียนรู้ว่าเสียงหนึ่งเสียงต้องคำนวณกี่หมื่นครั้งต่อวินาที เริ่มจากปุ่มกับเสียงง่าย ๆ ทีละอย่าง จนกลายเป็นเครื่องที่ทำบีต เล่นเมโลดี้ใส่เอฟเฟกต์ และอัดเพลงออกมาเป็นไฟล์ได้</p>
+    <p>ทุกอย่างยังอยู่บน breadboard สายไฟยังพันกันยุ่ง ป้ายปุ่มยังเป็นกระดาษสีชมพูเขียนมือ เพราะนี่คือต้นแบบที่ตั้งใจให้แก้ไขได้ตลอด ทุกเวอร์ชันเกิดจากการลองเล่นจริงแล้วเจอสิ่งที่อยากให้ดีขึ้น</p>
+  </section>
+
+  <section>
+    <h2>แนวคิด</h2>
+    <div class="pillars">
+      <div class="pillar"><span class="pnum">01</span><b>นักออกแบบเป็นคนคิด</b><p>เริ่มจากประสบการณ์การใช้ ปุ่มไหนกดบ่อยต้องอยู่ใกล้มือ จอ 128×64 จุดต้องอ่านออกในหนึ่งวินาที คู่มือต้องเปิดแล้วทำตามได้ทันที</p></div>
+      <div class="pillar"><span class="pnum">02</span><b>ประกอบเอง แก้เองได้</b><p>ใช้ชิ้นส่วนหาง่าย ต่อบน breadboard มองเห็นทุกเส้นทางของสัญญาณ อยากเพิ่มปุ่มหรือเปลี่ยนเสียงก็แก้ได้ ไม่มีกล่องดำ</p></div>
+      <div class="pillar"><span class="pnum">03</span><b>ดนตรีที่เริ่มเล่นได้เลย</b><p>มีสูตรเพลงพร้อมใช้ เมโทรนอม และแบ็กกิ้งแทร็กสำหรับฝึกกีตาร์ ไม่ต้องรู้ทฤษฎีมากก็ทำเพลงแรกได้</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>ทำอะไรได้บ้าง</h2>
+    <ul class="feats">
+      <li><b>บีต 4 แพตเทิร์น</b>KICK SNARE HAT BASS แพตเทิร์นละ 16 ช่อง</li>
+      <li><b>เมโลดี้ 4 ลูป</b>พิมพ์โน้ตทีละช่อง ซ้อนกันเป็นคอร์ดได้</li>
+      <li><b>เล่นสดทับบีต</b>ปุ่ม 4×4 เป็นคีย์บอร์ด 16 โน้ต</li>
+      <li><b>10 เครื่องดนตรี</b>เปียโน ระฆัง ขลุ่ย แตร ชิปทูน และอีกมาก</li>
+      <li><b>FX และ SWING</b>ก้อง สะท้อน แตก และจังหวะกระเด้ง</li>
+      <li><b>Chain 16 ห้อง</b>ต่อแพตเทิร์นเป็นเพลงทั้งท่อน</li>
+      <li><b>อัดเป็น .wav</b>ส่งเสียงผ่านสาย USB เข้าเว็บนี้</li>
+      <li><b>เซฟอัตโนมัติ</b>ปิดเครื่องแล้วงานยังอยู่</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>ใกล้ ๆ ตัวเครื่อง</h2>
+    <div class="gallery">
+      <figure><img src="img/detail-top.jpg" alt="ส่วนบนของเครื่อง: แผงปุ่ม 4×4 ลำโพง และปุ่มหมุน A กับ B" loading="lazy" width="900" height="458"><figcaption>แผงปุ่ม 4×4 · ลำโพง 3 วัตต์ · ปุ่มหมุน A ความเร็ว B ความดัง</figcaption></figure>
+      <figure><img src="img/detail-panel.jpg" alt="ปุ่มฟังก์ชัน 7 ปุ่มติดป้ายสีชมพู จอ OLED และบอร์ด Pico 2 W" loading="lazy" width="800" height="751"><figcaption>ปุ่มฟังก์ชัน 7 ปุ่ม · จอ OLED · สมองของเครื่องคือ Pico 2 W</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>ข้างในมีอะไร</h2>
+    <div class="spec">
+      <dl>
+        <dt>สมอง</dt><dd>Raspberry Pi Pico 2 W ใช้ 2 คอร์ คอร์หนึ่งดูปุ่มกับจอ อีกคอร์สร้างเสียงอย่างเดียว</dd>
+        <dt>เสียง</dt><dd>สังเคราะห์สด 22,050 ครั้งต่อวินาที ส่งผ่าน I2S เข้าแอมป์ MAX98357A และลำโพง 3W</dd>
+        <dt>จอ</dt><dd>OLED 128×64 จุด สื่อสารผ่าน I2C</dd>
+        <dt>ควบคุม</dt><dd>ปุ่ม 4×4 · ปุ่มฟังก์ชัน 7 ปุ่ม · ปุ่มหมุน KY-040 สองตัว · สวิตช์เปิดปิด</dd>
+        <dt>โครง</dt><dd>breadboard 2 แผ่นบนแผ่นฟองน้ำ ยึดด้วยสกรู</dd>
+        <dt>ซอฟต์แวร์</dt><dd>Arduino IDE + arduino-pico · เว็บนี้ใช้ Web Serial และ Web Audio</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section>
+    <h2>เส้นทางที่ผ่านมา</h2>
+    <ol class="timeline">
+      <li><b>เริ่มต้น</b><span>บีต 16 ช่องแรกบน breadboard</span></li>
+      <li><b>v1.7</b><span>เมโลดี้ 4 ลูปซ้อนกัน</span></li>
+      <li><b>v1.9</b><span>SWING จังหวะกระเด้ง</span></li>
+      <li><b>v2.0</b><span>จำความดัง BPM และ FX หลังปิดเครื่อง</span></li>
+      <li><b>v2.1</b><span>แก้จอค้างหลังอัปโหลดโค้ด</span></li>
+      <li><b>v2.2</b><span>อัดเพลงเป็นไฟล์ .wav ผ่านสาย USB</span></li>
+      <li class="cur"><b>DEMO 1</b><span>โครงฟองน้ำ · คู่มือ สมุดเพลง และเว็บนี้</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>ก้าวต่อไป</h2>
+    <p class="small" style="margin-top:-6px">ไอเดียที่คิดไว้ ยังไม่ได้ทำ</p>
+    <ul class="next">
+      <li><b>เมโลดี้เล่นเรียงลูป</b>เลือกได้ว่าจะให้ 4 ลูปดังพร้อมกัน หรือเรียงต่อกันเป็นทำนองยาว 4 ห้อง</li>
+      <li><b>จังหวะ 3/4 ในตัว</b>ตั้งความยาวแพตเทิร์นเป็น 12 ช่อง เล่นเพลงวอลซ์ได้ตรง ๆ</li>
+      <li><b>หมุนผังปุ่ม</b>ตั้งให้ปุ่มซ้ายบนเป็น S1 เสมอ ไม่ว่าจะติดแผงด้านไหน</li>
+      <li><b>กล่องจริง</b>โครงแข็งแรงขึ้น และกล่องลำโพงปิดให้เสียงเบสหนาขึ้น</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>คำถามที่พบบ่อย</h2>
+    <details><summary>ต้องมีพื้นฐานอิเล็กทรอนิกส์ไหม</summary><p>ไม่ต้อง คนสร้างเครื่องนี้เองก็เริ่มจากศูนย์ คู่มือวงจรบอกทุกเส้นสายว่าต่อจากไหนไปไหน</p></details>
+    <details><summary>เอาโค้ดไปใช้ได้ไหม</summary><p>ได้ ดาวน์โหลดเฟิร์มแวร์ได้ในแท็บ <a href="#manual">คู่มือ</a> แล้วอัปโหลดผ่าน Arduino IDE</p></details>
+    <details><summary>เว็บนี้ใช้บนมือถือได้ไหม</summary><p>แท็บทำดนตรีและคู่มือใช้บนมือถือได้ ส่วนแท็บอัดเสียงต้องใช้ Chrome หรือ Edge บนคอมพิวเตอร์ เพราะต้องต่อสาย USB</p></details>
+    <details><summary>เสียงในแท็บทำดนตรีเหมือนเครื่องจริงไหม</summary><p>ใกล้เคียง เว็บจำลองวิธีสร้างเสียงแบบเดียวกับเครื่อง แต่ไม่เหมือน 100% ใช้ลองฟังก่อนพิมพ์สูตรลงเครื่อง</p></details>
+  </section>
+
+</div>
+
+<aside class="aboutside">
+  <div class="card sidebox">
+    <span class="eyebrow">สถานะโปรเจกต์</span>
+    <b class="stage">ต้นแบบที่ใช้งานได้จริง</b>
+    <div class="stages" aria-label="ขั้นตอนโปรเจกต์ อยู่ที่ขั้นต้นแบบ DEMO 1">
+      <span class="done">ไอเดีย</span><span class="done">breadboard</span><span class="done cur">DEMO 1</span><span>กล่องจริง</span><span>แผงวงจร</span>
+    </div>
+    <div class="bar" aria-hidden="true"><i style="width:60%"></i></div>
+    <p class="small" style="margin:0">ผ่านมาแล้ว 3 จาก 5 ขั้น · ขั้นต่อไปคือทำกล่องจริง</p>
+    <a class="btn primary wide" href="#music">ลองฟังเพลงจากเครื่อง</a>
+    <a class="btn wide" href="#manual">คู่มือและไฟล์ดาวน์โหลด</a>
+  </div>
+  <div class="card creator">
+    <img src="https://github.com/skhwanchai.png?size=160" alt="" width="64" height="64" loading="lazy">
+    <div>
+      <span class="eyebrow">ผู้คิดค้นและออกแบบ</span>
+      <b>ผศ.ดร.ขวัญใจ สุขก้อน</b>
+      <span class="small">อาจารย์และนักออกแบบกราฟิก สาขาออกแบบกราฟิกและมัลติมีเดีย</span>
+      <a href="https://github.com/skhwanchai" target="_blank" rel="noopener">github.com/skhwanchai</a>
+    </div>
+  </div>
+</aside>
+</div>
+
+<section class="card endcta">
+  <h2>อยากลองสร้างเองบ้าง?</h2>
+  <p>เริ่มจากคู่มือวงจร ต่อทีละชิ้นตามผัง แล้วอัปโหลดเฟิร์มแวร์ เครื่องของคุณจะเล่นทุกเพลงในเว็บนี้ได้เหมือนกัน</p>
+  <div class="ctas">
+    <a class="btn primary" href="downloads/PocketSeq-Circuit.pdf" download>ดาวน์โหลดคู่มือวงจร</a>
+    <a class="btn" href="downloads/pocket_seq_v22.ino" download>ดาวน์โหลดเฟิร์มแวร์</a>
+  </div>
+</section>
+
+</div><!-- /viewAbout -->
+
 
 <p class="small" style="text-align:center;margin:0">Pocket Seq · ใช้กับเฟิร์มแวร์ v2.2 ขึ้นไป · ไฟล์เสียงอยู่ในเครื่องคุณเท่านั้น ไม่ถูกส่งขึ้นเน็ต</p>
 
@@ -479,17 +892,23 @@ if ('serviceWorker' in navigator && location.protocol === 'https:') {
 <script>
 // ---------- สลับแท็บ อัดเสียง / ทำดนตรี (การเชื่อมต่อ USB ไม่หลุดตอนสลับ) ----------
 (() => {
-  const rec = document.getElementById('viewRec'), mus = document.getElementById('viewMusic');
-  const tR = document.getElementById('tabRec'), tM = document.getElementById('tabMusic');
+  const VIEWS = { rec: 'viewRec', music: 'viewMusic', manual: 'viewManual', about: 'viewAbout' };
+  const TABS = { rec: 'tabRec', music: 'tabMusic', manual: 'tabManual', about: 'tabAbout' };
+  let shown = null;
   function route() {
     let h = location.hash;
     if (!h) { let last = 'rec'; try { last = localStorage.getItem('ps-tab') || 'rec'; } catch (e) {} h = '#' + last; }
-    const music = h.startsWith('#music');
-    rec.hidden = music; mus.hidden = !music;
-    tR.setAttribute('aria-current', music ? 'false' : 'page');
-    tM.setAttribute('aria-current', music ? 'page' : 'false');
-    try { localStorage.setItem('ps-tab', music ? 'music' : 'rec'); } catch (e) {}
-    if (music && window.PSMusic) window.PSMusic.route(h);
+    let key = h.slice(1).split('/')[0];
+    if (!VIEWS[key]) key = 'rec';
+    for (const k in VIEWS) {
+      document.getElementById(VIEWS[k]).hidden = k !== key;
+      document.getElementById(TABS[k]).setAttribute('aria-current', k === key ? 'page' : 'false');
+    }
+    try { localStorage.setItem('ps-tab', key); } catch (e) {}
+    document.querySelector('.wrap').classList.toggle('wide', key === 'about');
+    if (key === 'music' && window.PSMusic) window.PSMusic.route(h);
+    if (shown !== null && shown !== key) window.scrollTo(0, 0);
+    shown = key;
   }
   window.addEventListener('hashchange', route);
   route();
